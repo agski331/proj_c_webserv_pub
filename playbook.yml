@@ -15,9 +15,7 @@
   - name:  clone git repo
     become: true
     become_user: root
-    shell: git clone git@github.com:CSEC731-SP22/project-c---hardening-a-web-application-agski331.git -b master projcwebserv
-    environment:
-      GIT_SSH_COMMAND: "ssh -i /home/aaron/Documents/github_key"
+    shell: git clone https://github.com/agski331/proj_c_webserv_pub.git projcwebserv
   - name: run docker compose
     shell: docker-compose up -d
     become: true
