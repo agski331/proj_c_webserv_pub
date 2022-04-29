@@ -1,0 +1,24 @@
+version: "3"
+services:
+  dvwa:
+    hostname: dvwa-server
+    image: vulnerables/web-dvwa
+    expose: 
+      - "80"
+
+  https_proxy:
+    hostname: https_proxy
+    image: nginx
+    ports:
+      - "443:443"
+    volumes:
+      - "./certs:/certs"
+      - "./nginx:/etc/nginx"
+
+  modsecurity:
+    hostname: modsecurity-proxy
+    image: owasp/modsecurity-crs:apache
+    ports:
+      - "8080:80"
+    environment:
+      - BACKEND=http://dvwa-server
